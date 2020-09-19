@@ -33,4 +33,5 @@ merged_data<-cbind(merged_label, merged_subjects, merged_set)
 #Extract features measuring mean and standard deviation
 MxSD_data<-merged_data %>% select(activity, subjects, matches("\\.mean\\.")|contains(".std."))
 
-
+#Changing entries in activity column into names of the activities
+MxSd_data[,1]<-factor(MxSD_data[,1], levels<-activity_labels[,1], label<-activity_labels[,2])
