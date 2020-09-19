@@ -24,7 +24,7 @@ train_label<-read.table("./UCI HAR Dataset/train/y_train.txt", col.names= "activ
 test_set<-read.table("./UCI HAR Dataset/test/X_test.txt", col.names=ft_names[,2])
 train_set<-read.table("./UCI HAR Dataset/train/X_train.txt", col.names=ft_names[,2])
 
-#Merge train and test sets and labels into one data frame
+#Merge train and test sets, subjects and labels into one data frame
 merged_set<-rbind(train_set, test_set)
 merged_label<-rbind(train_label, test_label)
 merged_subjects<-rbind(subjects_train, subjects_test)
@@ -35,3 +35,15 @@ MxSD_data<-merged_data %>% select(activity, subjects, matches("\\.mean\\.")|cont
 
 #Changing entries in activity column into names of the activities
 MxSD_data[,1]<-factor(MxSD_data[,1], levels<-activity_labels[,1], label<-activity_labels[,2])
+
+#Rename columns to be descriptive
+names(MxSD_data)<-names(MxSD_data) %>% 
+  gsub("^t", "Time Domain ", .) %>% gsub("^f", "FFT of ", .) %>%
+  gsub("(Body){1,2}", "\\1 ", .) %>% gsub("(Gravity)", "\\1 ", .) %>%
+  gsub("Acc", "Accelerometer ", .) %>% gsub("Gyro", "Gyroscope ", .) %>%
+  gsub("(Jerk)","\\1 ", .) %>% gsub("(.*)Mag(.*)", "\\1\\2\\(Magnitude\\)", .) %>%
+  gsub("(.*)\\.mean\\.+([A-Z]|\\()", "Mean of \\1\\2", .) %>%
+  gsub("(.*)\\.std\\.+([A-Z]|\\()", "Standard deviaion of \\1\\2", .) %>%
+  gsub("([A-Z])$", "\\(\\1-component\\)", .) %>%
+  gsub("activity", "Activity", .) %>% gsub("subjects", "Subject code", .)
+  
