@@ -10,7 +10,7 @@ if( !file.exists( "UCI HAR Dataset" )){
 ft_names<-read.table("./UCI HAR Dataset/features.txt")
 
 #Read file listing activity labels
-activity_labels<-read.table("./UCI HAR Dataset/activity_labels.txt", col.names=c("n","label"))
+activity_labels<-read.table("./UCI HAR Dataset/activity_labels.txt", col.names=c("label", "activity"))
 
 #Read subject numbers for the data sets
 subjects_test<-read.table("./UCI HAR Dataset/test/subject_test.txt", col.names="subjects")
@@ -31,6 +31,6 @@ merged_subjects<-rbind(subjects_train, subjects_test)
 merged_data<-cbind(merged_label, merged_subjects, merged_set)
 
 #Extract features measuring mean and standard deviation
-MxSD_data<-merged_data %>% select(activity, subjects ,contains("-mean()-")|contains("-std()-"))
+MxSD_data<-merged_data %>% select(activity, subjects, matches("\\.mean\\.")|contains(".std."))
 
 
