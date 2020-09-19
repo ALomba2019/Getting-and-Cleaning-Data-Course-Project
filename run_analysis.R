@@ -29,3 +29,5 @@ merged_set<-rbind(train_set,test_set)
 merged_label<-rbind(train_label,test_label)
 merged_data<-cbind(merged_set,"label"=merged_label)
 
+#Extract features measuring mean and standard deviation
+MxSD_data<-merged_set %>% select(label,contains("mean")|contains("std"))
