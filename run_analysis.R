@@ -41,9 +41,11 @@ names(MxSD_data)<-names(MxSD_data) %>%
   gsub("^t", "Time Domain ", .) %>% gsub("^f", "FFT of ", .) %>%
   gsub("(Body){1,2}", "\\1 ", .) %>% gsub("(Gravity)", "\\1 ", .) %>%
   gsub("Acc", "Accelerometer ", .) %>% gsub("Gyro", "Gyroscope ", .) %>%
-  gsub("(Jerk)","\\1 ", .) %>% gsub("(.*)Mag(.*)", "\\1\\2\\(Magnitude\\)", .) %>%
+  gsub("(Jerk)","\\1 ", .) %>% gsub("(.*)Mag(.*)", "\\1\\2Signal \\(Magnitude\\)", .) %>%
   gsub("(.*)\\.mean\\.+([A-Z]|\\()", "Mean of \\1\\2", .) %>%
   gsub("(.*)\\.std\\.+([A-Z]|\\()", "Standard deviaion of \\1\\2", .) %>%
-  gsub("([A-Z])$", "\\(\\1-component\\)", .) %>%
+  gsub("([A-Z])$", "Signal \\(\\1-component\\)", .) %>%
   gsub("activity", "Activity", .) %>% gsub("subjects", "Subject code", .)
+
+
   
