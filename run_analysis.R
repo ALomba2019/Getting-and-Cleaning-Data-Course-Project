@@ -47,5 +47,5 @@ names(MxSD_data)<-names(MxSD_data) %>%
   gsub("([A-Z])$", "Signal \\(\\1-component\\)", .) %>%
   gsub("activity", "Activity", .) %>% gsub("subjects", "Subject code", .)
 
-
-  
+#Create a new, tidy data set, containing average of each variable for each activity and subject pair
+tidy_data<-MxSD_data %>% group_by(Activity, `Subject code`) %>% summarise(across(everything(), mean))
