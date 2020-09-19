@@ -31,6 +31,6 @@ merged_subjects<-rbind(subjects_train, subjects_test)
 merged_data<-cbind(merged_label, merged_subjects, merged_set)
 
 #Extract features measuring mean and standard deviation
-MxSD_data<-merged_data %>% select(activity, subjects ,contains("mean")|contains("std"))
+MxSD_data<-merged_data %>% select(activity, subjects ,contains("-mean()-")|contains("-std()-"))
 
 
