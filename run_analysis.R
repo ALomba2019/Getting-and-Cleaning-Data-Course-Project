@@ -51,4 +51,4 @@ names(MxSD_data)<-names(MxSD_data) %>%
 tidy_data<-MxSD_data %>% group_by(Activity, `Subject code`) %>% summarise(across(everything(), mean))
 
 #Write the tidy data set into a text file if it doesn't already exist
-if(!file.exists("tidy_data_frame.txt")) write.table(tidy_data,"./tidy_data_frame.txt")
+if(!file.exists("tidy_data_frame.txt")) write.table(tidy_data,"./tidy_data_frame.txt", row.names=F)
